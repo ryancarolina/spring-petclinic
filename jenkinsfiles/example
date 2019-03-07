@@ -42,11 +42,12 @@ pipeline {
         sh 'sleep 4'
       }
     }
-    stage('Another stage') {
+    stage('Gatling Test') {
       agent any
       steps {
         //sample dummy step
         sh 'sleep 4'
+        sh "mvn gatling:test -Dgatling.simulationClass=computerdatabase.RecordedSimulationPetClinic"
       }
     }
   }
