@@ -44,6 +44,8 @@ public class ValidatorTests {
     
     @Test
     public void shouldNotValidateWhenLastNameEmpty() {
+	
+	System.out.println("Ryan's Test Start");
 
         LocaleContextHolder.setLocale(Locale.ENGLISH);
         Person person = new Person();
@@ -58,7 +60,7 @@ public class ValidatorTests {
         assertThat(violation.getPropertyPath().toString()).isEqualTo("lastName");
         assertThat(violation.getMessage()).isEqualTo("may not be empty");
 	
-	System.out.println("Ryan's Test");
+	System.out.println("Ryan's Test Complete");
     }
 
 }
