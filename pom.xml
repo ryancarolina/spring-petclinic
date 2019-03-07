@@ -48,7 +48,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <gatling.version>${project.version}</gatling.version>
+        <gatling.version>3.0.0-RC2</gatling.version>
         <gatling-plugin.version>3.0.1</gatling-plugin.version>
 
     </properties>
@@ -84,6 +84,13 @@
             <groupId>io.gatling</groupId>
             <artifactId>gatling-recorder</artifactId>
             <version>2.1.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/net.alchim31.maven/scala-maven-plugin -->
+        <dependency>
+            <groupId>net.alchim31.maven</groupId>
+            <artifactId>scala-maven-plugin</artifactId>
+            <version>3.4.2</version>
         </dependency>
 
         <dependency>
@@ -325,7 +332,7 @@
             <plugin>
                 <groupId>io.gatling</groupId>
                 <artifactId>gatling-maven-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.0.0</version>
             </plugin>
 
             <plugin>
