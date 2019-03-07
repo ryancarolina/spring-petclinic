@@ -8,6 +8,12 @@ pipeline {
   }
 
   stages {
+      stage('Lint') {
+          agent any
+          steps {
+              echo 'Lint Complete!'
+          }
+      }
     stage('Build') {
       agent any
       steps {
@@ -42,7 +48,7 @@ pipeline {
         sh 'sleep 4'
       }
     }
-    stage('Gatling Test') {
+    stage('Gatling Test Dev') {
       agent any
       steps {
         //sample dummy step
