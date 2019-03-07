@@ -50,5 +50,11 @@ pipeline {
         sh "mvn gatling:test -Dgatling.simulationClass=computerdatabase.RecordedSimulationPetClinic"
       }
     }
+    stage('Selenium Grid') {
+      agent any
+      steps {
+        echo 'UI Functional Tests on Selenium Grid'
+      }
+    }
   }
 }
