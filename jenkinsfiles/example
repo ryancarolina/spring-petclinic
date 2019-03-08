@@ -11,7 +11,10 @@ pipeline {
       stage('Lint') {
           agent any
           steps {
+              //If Lint check passes
               echo 'Lint Complete!'
+
+              //Else, push msg to slack to inform team of failure
           }
       }
     stage('Build') {
@@ -41,25 +44,49 @@ pipeline {
         sh "docker run -d -p 9966:8080 --name petclinic-tomcat-temp ${env.IMAGE}:${TAG}"
       }
     }
-    stage('Smoke-Test Dev') {
+    stage('Smoke Test Dev') {
       agent any
       steps {
-        //sample dummy step
         sh 'sleep 4'
+
+        //Push test results to slack
       }
     }
-    stage('Gatling Test Dev') {
+    stage('Performance, Load, and Security Test Dev') {
       agent any
       steps {
-        //sample dummy step
         sh 'sleep 4'
         sh "mvn gatling:test -Dgatling.simulationClass=computerdatabase.RecordedSimulationPetClinic"
+
+        //Push test results to slack
       }
     }
-    stage('Selenium Grid') {
+    stage('Functional Test Dev') {
       agent any
       steps {
         echo 'UI Functional Tests on Selenium Grid'
+
+        //Push test results to slack
+      }
+    }
+    stage('Deploy to Int') {
+      agent any
+      steps {
+        echo 'Deployment to Integration Complete!'
+      }
+    }
+    stage('Integration Test') {
+      agent any
+      steps {
+        echo 'Integration Tests Complete!'
+
+        //Push test results to slack
+      }
+    }
+    stage('Deploy to PreProd') {
+      agent any
+      steps {
+        echo 'Deployment to Pre-Production Complete!'
       }
     }
   }
