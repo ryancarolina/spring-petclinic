@@ -64,7 +64,8 @@ pipeline {
     stage('Functional Test Dev') {
       agent any
       steps {
-        echo 'UI Functional Tests on Selenium Grid'
+        sh 'sleep 4'
+        sh "mvn test -Dtest=KaijuTestClassExample"
 
         //Push test results to slack
       }
