@@ -32,6 +32,8 @@ public class Kaiju {
     String sauceURL = "https://" + sauceUsername + ":" + sauceAccessKey + "@ondemand.saucelabs.com:443/wd/hub";
     String osName = null;
     String gridNode = "http://ec2-18-232-71-47.compute-1.amazonaws.com:4444/wd/hub";
+    String gridNode2 = "http://192.168.1.152:4444/wd/hub";
+    String gridNode3 = "http://localhost:4444/wd/hub";
 
     public Kaiju(String browserType){
         if (browserType.equals("CHROME")) {
@@ -69,14 +71,14 @@ public class Kaiju {
             try {
                 //Set the browser type and other options below
                 DesiredCapabilities caps = DesiredCapabilities.chrome();
-                //caps.setCapability("platform", "Windows 2016");
+                caps.setCapability("platform", "MAC");
                 caps.setCapability("version", "");
                 caps.setCapability("name", "Test: " + getTime() );
                 //caps.setCapability("extendedDebugging", "false"); //Saucelabs known 504 gateway error with xDebugging enabled
                 caps.setCapability("idleTimeout", "1000");
 
                 //noinspection deprecation
-                kaijuDriver = new RemoteWebDriver(new java.net.URL(gridNode), caps);
+                kaijuDriver = new RemoteWebDriver(new java.net.URL(gridNode2), caps);
             } catch (Exception e) {
                 System.out.println("Error during Remote Test Setup" + e.toString());
             }
