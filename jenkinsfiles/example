@@ -1,5 +1,23 @@
 #!/bin/env groovy
 
+import groovy.json.JsonOutput
+
+def slackNotificationChannel = 'build-status'
+
+def notifySlack(text, channel, attachments) {
+    def slackURL = '[SLACK_WEBHOOK_URL]'
+    def jenkinsIcon = 'https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png'
+
+    def payload = JsonOutput.toJson([text: text,
+                                     channel: channel,
+                                     username: "Jenkins",
+                                     icon_url: jenkinsIcon,
+                                     attachments: attachments
+    ])
+
+    sh "curl -X POST --data-urlencode \'payload=${payload}\' ${slackURL}"
+}
+
 pipeline {
   agent none
 
@@ -68,6 +86,7 @@ pipeline {
         sh "mvn test -Dtest=KaijuTestClassExample"
 
         //Push test results to slack
+          notifySlack("Success!", slackNotificationChannel, [])
       }
     }
     stage('Deploy to Int') {
