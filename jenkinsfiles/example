@@ -68,6 +68,7 @@ pipeline {
         sh 'sleep 4'
 
         //Push test results to slack
+          notifySlack("Smoke Tests Passed!", slackNotificationChannel, [])
       }
     }
     stage('Performance, Load, and Security Test Dev') {
@@ -77,6 +78,7 @@ pipeline {
         sh "mvn gatling:test -Dgatling.simulationClass=computerdatabase.RecordedSimulationPetClinic"
 
         //Push test results to slack
+          notifySlack("Performance Tests Passed!", slackNotificationChannel, [])
       }
     }
     stage('Functional Test Dev') {
@@ -86,7 +88,7 @@ pipeline {
         sh "mvn test -Dtest=KaijuTestClassExample"
 
         //Push test results to slack
-          notifySlack("Success!", slackNotificationChannel, [])
+          notifySlack("Functional Tests Passed!", slackNotificationChannel, [])
       }
     }
     stage('Deploy to Int') {
