@@ -26,13 +26,12 @@ pipeline {
   }
 
   stages {
-      stage('Lint') {
+      stage('Sonar Scan and Lint') {
           agent any
           steps {
-              //If Lint check passes
-              echo 'Lint Complete!'
-
-              //Else, push msg to slack to inform team of failure
+              //sh 'mvn sonar:sonar -Dsonar.host.url=https://sonarqube.di2e.net -Dsonar.login=6b1587d8ff602d44200c67c39a100fa130116a6f'
+              sh 'mvn sonar:sonar   -Dsonar.projectKey=ryancarolina_spring-petclinic   -Dsonar.organization=ryancarolina-github   -Dsonar.host.url=https://sonarcloud.io   -Dsonar.login=355136aaaf8c1240626089625904884ba8c63efe'
+              notifySlack("Sonar Scan Passed!", slackNotificationChannel, [])
           }
       }
     stage('Build') {
